@@ -29,8 +29,10 @@ namespace RecycleCoin
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tab_CoinInfo = new System.Windows.Forms.TabControl();
             this.tab_List = new System.Windows.Forms.TabPage();
+            this.btn_Exit = new System.Windows.Forms.Button();
             this.btn_KulSil = new System.Windows.Forms.Button();
             this.btn_Guncelle = new System.Windows.Forms.Button();
             this.cmb_KullaniciTur = new System.Windows.Forms.ComboBox();
@@ -51,13 +53,24 @@ namespace RecycleCoin
             this.lbl_Ad = new System.Windows.Forms.Label();
             this.dataGrid_Kullanicilar = new System.Windows.Forms.DataGridView();
             this.tab_Onay = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cmb_Onay = new System.Windows.Forms.ComboBox();
+            this.lbl_Onay = new System.Windows.Forms.Label();
+            this.dataGrid_Onay = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt_RecycleFiyat = new System.Windows.Forms.TextBox();
+            this.txt_ToplamRecycle = new System.Windows.Forms.TextBox();
+            this.lbl_RecycleFiyat = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_Reycle = new System.Windows.Forms.Label();
+            this.dataGrid_Para = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tab_CoinInfo.SuspendLayout();
             this.tab_List.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Kullanicilar)).BeginInit();
             this.tab_Onay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Onay)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Para)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_CoinInfo
@@ -75,6 +88,7 @@ namespace RecycleCoin
             // tab_List
             // 
             this.tab_List.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tab_List.Controls.Add(this.btn_Exit);
             this.tab_List.Controls.Add(this.btn_KulSil);
             this.tab_List.Controls.Add(this.btn_Guncelle);
             this.tab_List.Controls.Add(this.cmb_KullaniciTur);
@@ -100,6 +114,16 @@ namespace RecycleCoin
             this.tab_List.Size = new System.Drawing.Size(1169, 723);
             this.tab_List.TabIndex = 0;
             this.tab_List.Text = "Listeleme";
+            // 
+            // btn_Exit
+            // 
+            this.btn_Exit.Location = new System.Drawing.Point(1072, 6);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(94, 29);
+            this.btn_Exit.TabIndex = 14;
+            this.btn_Exit.Text = "Çıkış";
+            this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // btn_KulSil
             // 
@@ -292,7 +316,9 @@ namespace RecycleCoin
             // tab_Onay
             // 
             this.tab_Onay.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.tab_Onay.Controls.Add(this.dataGridView1);
+            this.tab_Onay.Controls.Add(this.cmb_Onay);
+            this.tab_Onay.Controls.Add(this.lbl_Onay);
+            this.tab_Onay.Controls.Add(this.dataGrid_Onay);
             this.tab_Onay.Location = new System.Drawing.Point(4, 29);
             this.tab_Onay.Name = "tab_Onay";
             this.tab_Onay.Padding = new System.Windows.Forms.Padding(3);
@@ -300,28 +326,118 @@ namespace RecycleCoin
             this.tab_Onay.TabIndex = 1;
             this.tab_Onay.Text = "Onaylama";
             // 
-            // dataGridView1
+            // cmb_Onay
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 151);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(1163, 569);
-            this.dataGridView1.TabIndex = 13;
+            this.cmb_Onay.FormattingEnabled = true;
+            this.cmb_Onay.Items.AddRange(new object[] {
+            "0",
+            "1"});
+            this.cmb_Onay.Location = new System.Drawing.Point(93, 18);
+            this.cmb_Onay.Name = "cmb_Onay";
+            this.cmb_Onay.Size = new System.Drawing.Size(166, 28);
+            this.cmb_Onay.TabIndex = 15;
+            this.cmb_Onay.SelectedIndexChanged += new System.EventHandler(this.cmb_Onay_SelectedIndexChanged);
+            // 
+            // lbl_Onay
+            // 
+            this.lbl_Onay.AutoSize = true;
+            this.lbl_Onay.Location = new System.Drawing.Point(8, 21);
+            this.lbl_Onay.Name = "lbl_Onay";
+            this.lbl_Onay.Size = new System.Drawing.Size(79, 20);
+            this.lbl_Onay.TabIndex = 14;
+            this.lbl_Onay.Text = "Onaylama:";
+            // 
+            // dataGrid_Onay
+            // 
+            this.dataGrid_Onay.AllowUserToAddRows = false;
+            this.dataGrid_Onay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_Onay.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGrid_Onay.Location = new System.Drawing.Point(3, 67);
+            this.dataGrid_Onay.Name = "dataGrid_Onay";
+            this.dataGrid_Onay.ReadOnly = true;
+            this.dataGrid_Onay.RowHeadersWidth = 51;
+            this.dataGrid_Onay.RowTemplate.Height = 29;
+            this.dataGrid_Onay.Size = new System.Drawing.Size(1163, 653);
+            this.dataGrid_Onay.TabIndex = 13;
+            this.dataGrid_Onay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_Onay_CellClick);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tabPage1.Controls.Add(this.txt_RecycleFiyat);
+            this.tabPage1.Controls.Add(this.txt_ToplamRecycle);
+            this.tabPage1.Controls.Add(this.lbl_RecycleFiyat);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lbl_Reycle);
+            this.tabPage1.Controls.Add(this.dataGrid_Para);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1169, 723);
             this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Coin Bilgileri";
+            this.tabPage1.Text = "tabPage1";
+            // 
+            // txt_RecycleFiyat
+            // 
+            this.txt_RecycleFiyat.Location = new System.Drawing.Point(466, 227);
+            this.txt_RecycleFiyat.Name = "txt_RecycleFiyat";
+            this.txt_RecycleFiyat.ReadOnly = true;
+            this.txt_RecycleFiyat.Size = new System.Drawing.Size(218, 27);
+            this.txt_RecycleFiyat.TabIndex = 4;
+            this.txt_RecycleFiyat.Text = "0";
+            this.txt_RecycleFiyat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txt_ToplamRecycle
+            // 
+            this.txt_ToplamRecycle.Location = new System.Drawing.Point(466, 185);
+            this.txt_ToplamRecycle.Name = "txt_ToplamRecycle";
+            this.txt_ToplamRecycle.ReadOnly = true;
+            this.txt_ToplamRecycle.Size = new System.Drawing.Size(218, 27);
+            this.txt_ToplamRecycle.TabIndex = 3;
+            this.txt_ToplamRecycle.Text = "0";
+            this.txt_ToplamRecycle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_RecycleFiyat
+            // 
+            this.lbl_RecycleFiyat.AutoSize = true;
+            this.lbl_RecycleFiyat.Location = new System.Drawing.Point(329, 230);
+            this.lbl_RecycleFiyat.Name = "lbl_RecycleFiyat";
+            this.lbl_RecycleFiyat.Size = new System.Drawing.Size(131, 20);
+            this.lbl_RecycleFiyat.TabIndex = 2;
+            this.lbl_RecycleFiyat.Text = "RecycleCoin Fiyatı:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(276, 176);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.TabIndex = 1;
+            // 
+            // lbl_Reycle
+            // 
+            this.lbl_Reycle.AutoSize = true;
+            this.lbl_Reycle.Location = new System.Drawing.Point(264, 188);
+            this.lbl_Reycle.Name = "lbl_Reycle";
+            this.lbl_Reycle.Size = new System.Drawing.Size(196, 20);
+            this.lbl_Reycle.TabIndex = 0;
+            this.lbl_Reycle.Text = "Toplam RecycleCoin Miktarı:";
+            // 
+            // dataGrid_Para
+            // 
+            this.dataGrid_Para.AllowUserToAddRows = false;
+            this.dataGrid_Para.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_Para.Location = new System.Drawing.Point(645, 233);
+            this.dataGrid_Para.Name = "dataGrid_Para";
+            this.dataGrid_Para.RowHeadersWidth = 51;
+            this.dataGrid_Para.RowTemplate.Height = 29;
+            this.dataGrid_Para.Size = new System.Drawing.Size(20, 17);
+            this.dataGrid_Para.TabIndex = 5;
+            this.dataGrid_Para.Visible = false;
+            // 
+            // timer1
+            // 
+            
             // 
             // Admin
             // 
@@ -338,7 +454,11 @@ namespace RecycleCoin
             this.tab_List.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Kullanicilar)).EndInit();
             this.tab_Onay.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tab_Onay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Onay)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Para)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -366,8 +486,18 @@ namespace RecycleCoin
         private System.Windows.Forms.ComboBox cmb_KullaniciTur;
         private System.Windows.Forms.Label lbl_KullaniciTur;
         private System.Windows.Forms.Button btn_Guncelle;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dataGrid_Onay;
         private System.Windows.Forms.Button btn_KulSil;
+        private System.Windows.Forms.ComboBox cmb_Onay;
+        private System.Windows.Forms.Label lbl_Onay;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox txt_ToplamRecycle;
+        private System.Windows.Forms.Label lbl_RecycleFiyat;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_Reycle;
+        private System.Windows.Forms.TextBox txt_RecycleFiyat;
+        private System.Windows.Forms.DataGridView dataGrid_Para;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btn_Exit;
     }
 }

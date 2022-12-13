@@ -15,13 +15,14 @@ namespace RecycleCoin
     public partial class Giris : Form
     {
         KullaniciProvider k = new KullaniciProvider();
-        
+        RecycleProvider pro = new RecycleProvider();
         public Giris()
         {
             string system = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             var userInfo = system.Split("\\");
             LoginInfo.pcName = userInfo[0];
             LoginInfo.userName = userInfo[1];
+            label1.Text = pro.Timer().Start();
 
             InitializeComponent();
         }

@@ -205,23 +205,12 @@ namespace RecycleCoin
                 return hash.ToLower();
             }
         }
-        //public DataTable IDCek()
-        //{
-        //    DataTable dt = new DataTable();
-        //    conn.Open();
-        //    SqlCommand cmd = new SqlCommand("Select KullaniciID from Kullanicilar", conn);
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    da.Fill(dt);
-        //    conn.Close();
-        //    da.Dispose();
-        //    return dt;
-        //}
-        public bool KarbonEkle(int karbon, string kulad)
+ 
+        public bool KarbonEkle(int karbon, string kulID)
         {
             bool result = false;
             conn.Open();
-            cmd = new SqlCommand("Update Kullanicilar Set ToplamKarbon=('" + karbon + "') where KullaniciAd='" + kulad + "'", conn);
-
+            cmd = new SqlCommand("Update Cuzdan Set Carbon+=('" + karbon + "') where Kullanici_ID='" + kulID + "'", conn);
             if (cmd.ExecuteNonQuery() != -1)
             {
                 result = true;
@@ -242,8 +231,6 @@ namespace RecycleCoin
             conn.Close();
             return result;
         }
-
-
         public string IdOlustur()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -266,11 +253,11 @@ namespace RecycleCoin
                 return true;
             return false;
         }
-        public bool Transfer(string sha, int karbon, double RecycleCoin, DateTime date)
+        public bool Transfer(string sha, string mail,int karbon, double RecycleCoin, DateTime date)
         {
             bool result = false;
             conn.Open();
-            cmd = new SqlCommand("INSERT INTO Transfer(Sha,Karbon, RecycleCoin, IstekTarihi) VALUES ('" + sha + "','" + karbon + "', '" + RecycleCoin + "', '" + date + "')", conn);
+            cmd = new SqlCommand("INSERT INTO Transfer(KullaniciKimlik,Mail,Karbon, RecycleCoin, IstekTarihi) VALUES ('" + sha + "','"+mail+"','" + karbon + "', '" + RecycleCoin + "', '" + date + "')", conn);
 
             if (cmd.ExecuteNonQuery() != -1)
             {
@@ -280,5 +267,42 @@ namespace RecycleCoin
             return result;
         }
 
+        public DataTable AdminOnaylama()
+        {
+            conn.Open();
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand("Select TransferID, KullaniciKimlik, Mail, Karbon, RecycleCoin, IstekTarihi,Onay from Transfer where Onay='0'", conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            conn.Close();
+            da.Dispose();
+            return dt;
+        }
+        public void TransferOnay(string kimlik, string transferid, DateTime onayTar, char onay)
+        {
+            bool result = false;
+            conn.Open();
+            cmd = new SqlCommand("Update Transfer Set DonusumTarihi=('" + onayTar + "'), Onay=('" + onay + "') where TransferID='" + transferid + "'", conn);
+            if (cmd.ExecuteNonQuery() != -1)
+            {
+                conn.Close();
+                Cuzdan(kimlik);
+            }
+        }
+        public void Cuzdan(string kimlik)
+        {
+            bool result = false;
+            RecycleProvider rc = new RecycleProvider();//bu karbon hiç çekilmedi mi şimdi
+            conn.Open();
+            cmd = new SqlCommand("UPDATE Cuzdan SET Coin = 0, RecycleCoin+= '"+rc.RecycleCoinHesapla(karbon)+"' WHERE kullanici_ID='" + kimlik + "'", conn);
+            
+            if (cmd.ExecuteNonQuery() != -1)
+            {
+                result = true;
+            }
+            conn.Close();
+        }   
+
+        
     }
 }

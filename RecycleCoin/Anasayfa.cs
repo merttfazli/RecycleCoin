@@ -241,14 +241,7 @@ namespace RecycleCoin
             txt_KulAd.Text = kullanici.KullaniciAd;
             txt_Mail.Text = kullanici.mail;
             txt_Telefon.Text = kullanici.telefonNo;
-            //DataTable dt = new DataTable();
-            //conn.Open();
-            //SqlCommand cmd = new SqlCommand("Select KullaniciID,Ad,Soyad,Yas,KullaniciAd,Mail,TelefonNumarasi,Cuzdan.kullaniciID, from Kullanicilar where KullaniciAd='" + kul.KullaniciAd + "'", conn);
-            //SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //da.Fill(dt);
-            //conn.Close();
-            //da.Dispose();
-            //return dt;
+           
         }
         private void btn_Donustur_Click(object sender, EventArgs e)
         {
@@ -269,6 +262,7 @@ namespace RecycleCoin
         }
         private void link_Donustur_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            DialogResult dialog = new DialogResult();
             DateTime tarih = DateTime.Now;
             if (karbontut < 100000)
             {
@@ -276,12 +270,16 @@ namespace RecycleCoin
             }
             else
             {
-                if (kul.Transfer(txt_KullaniciKimlik.Text, karbontut, recycleCoin, tarih))
+                if (kul.Transfer(txt_KullaniciKimlik.Text,mail,karbontut, recycleCoin, tarih))
 
-                    MessageBox.Show(karbontut + " Adet Karbon Dönüşümü İçin Bilgi Geçildi En Kısa Sürede " + karbontut + " Karbona Eşit RecycleCoin Hesabınıza Yatırılacaktır.");
-                karbontut = 0;
-                lbl_KarbonMikListe.Text = "0";
-                kul.KarbonEkle(karbontut, LoginInfo.kulad);
+                   dialog= MessageBox.Show(karbontut + " Adet Karbon Dönüşümü İçin Bilgi Geçildi En Kısa Sürede " + karbontut + " Karbona Eşit RecycleCoin Hesabınıza Yatırılacaktır.","Bilgilendirme !",MessageBoxButtons.OK);
+                if (dialog==DialogResult.OK)
+                {
+                    karbontut = 0;
+                    lbl_KarbonMikListe.Text = "0";
+                    kul.KarbonEkle(karbontut, txt_KullaniciKimlik.Text);
+                }
+
             }
         }
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\merts\\Masaüstü\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj": {}
+    "C:\\Users\\merts\\Belgeler\\GitHub\\RecycleCoin\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj": {}
   },
   "projects": {
-    "C:\\Users\\merts\\Masaüstü\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj": {
+    "C:\\Users\\merts\\Belgeler\\GitHub\\RecycleCoin\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\merts\\Masaüstü\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj",
+        "projectUniqueName": "C:\\Users\\merts\\Belgeler\\GitHub\\RecycleCoin\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj",
         "projectName": "RecycleCoin",
-        "projectPath": "C:\\Users\\merts\\Masaüstü\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj",
+        "projectPath": "C:\\Users\\merts\\Belgeler\\GitHub\\RecycleCoin\\RecycleCoin\\RecycleCoin\\RecycleCoin.csproj",
         "packagesPath": "C:\\Users\\merts\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\merts\\Masaüstü\\RecycleCoin\\RecycleCoin\\obj\\",
+        "outputPath": "C:\\Users\\merts\\Belgeler\\GitHub\\RecycleCoin\\RecycleCoin\\RecycleCoin\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,6 +59,10 @@
             "Microsoft.NETCore.Platforms": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json.Bson": {
+              "target": "Package",
+              "version": "[1.0.2, )"
             },
             "QRCoder": {
               "target": "Package",
