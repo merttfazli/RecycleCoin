@@ -168,17 +168,17 @@ namespace RecycleCoin
         }
         private void cmb_Onay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DialogResult dialog = new DialogResult();
-            if (cmb_Onay.SelectedIndex==1)
-            {
-                dialog = MessageBox.Show("Onaylamak İstediğinize Emin Misiniz?","Bilgilendirme",MessageBoxButtons.YesNo);
-                if (dialog== DialogResult.Yes)
-                {
-                    onay = '1';
-                    kul.TransferOnay(kimlik, transferid, time, onay);
-                }
-            }
-            DatagridVeriEkle();
+            //DialogResult dialog = new DialogResult();
+            //if (cmb_Onay.SelectedIndex==1)
+            //{
+            //    dialog = MessageBox.Show("Onaylamak İstediğinize Emin Misiniz?","Bilgilendirme",MessageBoxButtons.YesNo);
+            //    if (dialog== DialogResult.Yes)
+            //    {
+            //        onay = '1';
+            //        kul.TransferOnay(kimlik, transferid, time, onay);
+            //    }
+            //}
+            //DatagridVeriEkle();
         }
 
         private void btn_Exit_Click(object sender, EventArgs e)

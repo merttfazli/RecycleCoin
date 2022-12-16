@@ -101,6 +101,7 @@ namespace RecycleCoin
                 cuz.coin_Miktari = Convert.ToDouble(dr[3].ToString());
                 para.Add(cuz);
             }
+            conn.Close();
             return para;
         }
         public DataTable kullaniciListele()
@@ -210,7 +211,7 @@ namespace RecycleCoin
         {
             bool result = false;
             conn.Open();
-            cmd = new SqlCommand("Update Cuzdan Set Carbon+=('" + karbon + "') where Kullanici_ID='" + kulID + "'", conn);
+            cmd = new SqlCommand("Update Cuzdan Set Carbon=('" + karbon + "') where Kullanici_ID='" + kulID + "'", conn);
             if (cmd.ExecuteNonQuery() != -1)
             {
                 result = true;
@@ -253,19 +254,7 @@ namespace RecycleCoin
                 return true;
             return false;
         }
-        public bool Transfer(string sha, string mail,int karbon, double RecycleCoin, DateTime date)
-        {
-            bool result = false;
-            conn.Open();
-            cmd = new SqlCommand("INSERT INTO Transfer(KullaniciKimlik,Mail,Karbon, RecycleCoin, IstekTarihi) VALUES ('" + sha + "','"+mail+"','" + karbon + "', '" + RecycleCoin + "', '" + date + "')", conn);
-
-            if (cmd.ExecuteNonQuery() != -1)
-            {
-                result = true;
-            }
-            conn.Close();
-            return result;
-        }
+       
 
         public DataTable AdminOnaylama()
         {
@@ -278,31 +267,20 @@ namespace RecycleCoin
             da.Dispose();
             return dt;
         }
-        public void TransferOnay(string kimlik, string transferid, DateTime onayTar, char onay)
+      
+        public void Cuzdan(string kimlik, int karbon, double coin)
         {
-            bool result = false;
-            conn.Open();
-            cmd = new SqlCommand("Update Transfer Set DonusumTarihi=('" + onayTar + "'), Onay=('" + onay + "') where TransferID='" + transferid + "'", conn);
-            if (cmd.ExecuteNonQuery() != -1)
-            {
-                conn.Close();
-                Cuzdan(kimlik);
-            }
-        }
-        public void Cuzdan(string kimlik)
-        {
-            bool result = false;
-            RecycleProvider rc = new RecycleProvider();//bu karbon hiç çekilmedi mi şimdi
-            conn.Open();
-            cmd = new SqlCommand("UPDATE Cuzdan SET Coin = 0, RecycleCoin+= '"+rc.RecycleCoinHesapla(karbon)+"' WHERE kullanici_ID='" + kimlik + "'", conn);
+            string sorgu = "Update Cuzdan Set Carbon-=@carbon,RecycleCoin+=@recycle Where kullanici_ID=@kullaniciID";
+            SqlCommand komut = new SqlCommand(sorgu, conn);
+            komut.Parameters.AddWithValue("@kullaniciID", kimlik);
+            komut.Parameters.AddWithValue("@carbon", karbon);
+            komut.Parameters.AddWithValue("@recycle", coin);
             
-            if (cmd.ExecuteNonQuery() != -1)
-            {
-                result = true;
-            }
+            
+            conn.Open();
+            komut.ExecuteNonQuery();
             conn.Close();
         }   
-
         
     }
 }

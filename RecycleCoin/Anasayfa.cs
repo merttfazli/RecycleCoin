@@ -3,7 +3,9 @@ using AForge.Video.DirectShow;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Media;
+using System.Threading;
 using System.Windows.Forms;
 using ZXing;
 namespace RecycleCoin
@@ -15,20 +17,36 @@ namespace RecycleCoin
         public static string mail;
         public static string telefon;
         public static int id;
+        
+
+        int karbontut = 0;
+        double recycleCoin = 0;
+
         UrunProvider urunProvider = new UrunProvider();
         KullaniciProvider kul = new KullaniciProvider();
+        Donustur don = new Donustur();
         public Anasayfa()
         {
             InitializeComponent();
-
+            don.FormClosed += new FormClosedEventHandler(don_FormClosed);
+            //don.TheButton += new EventHandler(don_TheButtonClicked);
             FotografYakala();
             KullaniciBilgileri();
             DatagridDoldur();
         }
+        void don_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lbl_KarbonMikListe.Text = "lalalasd";
+        }
+        //void don_TheButtonClicked(object sender, EventArgs e)
+        //{
+        //    lbl_KarbonMikListe.Text = "lalalasd";
+        //}
+        //TAB 1
+        VideoCaptureDevice cam;
+        FilterInfoCollection webcam;
         public void FotografYakala()
         {
-            FilterInfoCollection webcam;
-            VideoCaptureDevice cam;
             webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             cam = new VideoCaptureDevice(webcam[0].MonikerString);
             cam.NewFrame += new NewFrameEventHandler(cam_NewFrame);
@@ -40,29 +58,13 @@ namespace RecycleCoin
             Bitmap bit = (Bitmap)eventArgs.Frame.Clone();
             pic_QrOkutma.Image = bit;
         }
-        private void link_KulBilgi_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            KullaniciBilgiGuncelleme kulbilgi = new KullaniciBilgiGuncelleme();
-            kulbilgi.Show();
-            this.Hide();
-        }
         public void DataGridAyar()
         {
-            data_VeriTutucu.Columns[0].HeaderText = "Ürünün Adı";
-            data_VeriTutucu.Columns[1].HeaderText = "Ürünün Türü";
-            data_VeriTutucu.Columns[2].HeaderText = "Ürünün Kodu";
-            data_VeriTutucu.Columns[3].HeaderText = "Ürünün Karbon Miktarı";
-
-            data_VeriTutucu.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            data_VeriTutucu.Columns[0].Width = 188;
-            data_VeriTutucu.Columns[1].Width = 120;
-            data_VeriTutucu.Columns[2].Width = 185;
-            data_VeriTutucu.Columns[3].Width = 190;
-            data_VeriTutucu.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            data_VeriTutucu.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            data_VeriTutucu.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            data_VeriTutucu.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
+            datagrid_Sepet.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid_Sepet.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            datagrid_Sepet.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            datagrid_Sepet.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            datagrid_Sepet.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -73,129 +75,127 @@ namespace RecycleCoin
                 if (sonuc != null)
                 {
                     txt_UrunKodu.Text = sonuc.ToString();
-                    BilgileriGetir(txt_UrunKodu.Text);
-                    DataKontrol();
-                    playSimpleSound();
-                    FotografYakala();
                     timer1.Stop();
+                    if(BilgileriGetir(txt_UrunKodu.Text))
+                        DataKontrol();
                     if (datagrid_Sepet.Rows.Count > 0)
                     {
-                        dataGridBoyut();
+                        DataGridAyar();
                     }
                 }
             }
             timer1.Start();
         }
-        public void BilgileriGetir(string kod)
+        public bool BilgileriGetir(string kod)
         {
-            var veri = urunProvider.UrunleriListele().Find(x => (x.UrunKod == kod));
+            var veri = urunProvider.UrunleriListele().Find(x => (x.UrunKod == kod) && (x.UrunDurum == true));
             if (veri != null)
             {
                 txt_Urunad.Text = veri.UrunAd;
                 txt_UrunTur.Text = veri.UrunTur.ToString();
                 txt_KarbonMik.Text = veri.UrunKarbon.ToString();
+                return true;
             }
             else
             {
                 MessageBox.Show("Bu koda ait ürün bulunamamıştır!");
+                txt_UrunKodu.Text = "";
+                return false;
             }
-        }
-        DataTable tablo = new DataTable();
-        public void TexteDoldur()
-        {
-            txt_Urunad.Text = data_VeriTutucu.Rows[0].Cells[0].Value.ToString();
-            txt_UrunTur.Text = data_VeriTutucu.Rows[0].Cells[1].Value.ToString();
-            txt_UrunKodu.Text = data_VeriTutucu.Rows[0].Cells[2].Value.ToString();
-            txt_KarbonMik.Text = data_VeriTutucu.Rows[0].Cells[3].Value.ToString();
-        }
-        int toplamKarbon = 0;
-        double recycleCoin = 0;
-        //public void DataVeriEkle()
-        //{
-        //    tablo.Rows.Add(txt_UrunKodu.Text, txt_Urunad.Text, txt_UrunTur.Text, int.Parse(txt_KarbonMik.Text));
-        //    datagrid_Sepet.DataSource = tablo;
-        //}
-        public void ToplamKarbon()
-        {
-
-            datagrid_Sepet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            foreach (DataGridViewRow row in datagrid_Sepet.Rows)
-            {
-                int deger = int.Parse(row.Cells[3].Value.ToString());
-                toplamKarbon += deger;
-            }
+            return false;
         }
         public void DataKontrol()
         {
             string[] yeni = { txt_UrunKodu.Text, txt_Urunad.Text, txt_UrunTur.Text, txt_KarbonMik.Text };
-            if (datagrid_Sepet.Rows.Count == 0)
+            if (datagrid_Sepet.RowCount < 1)
             {
                 datagrid_Sepet.Rows.Add(yeni);
-
+                playSimpleSound();
             }
             else
             {
+                bool check = false;
                 datagrid_Sepet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 foreach (DataGridViewRow row in datagrid_Sepet.Rows)
                 {
-                    if ((row.Cells[0].Value.ToString().Equals(txt_UrunKodu.Text)) != true)
+                    if (row.Cells[0].Value.ToString() == txt_UrunKodu.Text)
                     {
-                        datagrid_Sepet.Rows.Add(yeni);
+                        check = true;
                     }
-                    else
-                    {
-                        timer1.Stop();
-                        DialogResult dialog = new DialogResult();
-                        dialog = MessageBox.Show("Ürün zaten sepette!", "UYARI", MessageBoxButtons.OK);
-                        if (dialog == DialogResult.OK)
-                        {
-                            timer1.Start();
-                        }
-                    }
+                    
+                }
+                if (!check)
+                {
+                    datagrid_Sepet.Rows.Add(yeni);
+                }
+                else
+                {
+                    MessageBox.Show("hata");
                 }
             }
         }
-        public void dataGridBoyut()
+        public void playSimpleSound()
         {
-            datagrid_Sepet.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid_Sepet.Columns[0].Width = 150;
-            datagrid_Sepet.Columns[1].Width = 280;
-            datagrid_Sepet.Columns[2].Width = 200;
-            datagrid_Sepet.Columns[3].Width = 190;
-            datagrid_Sepet.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            datagrid_Sepet.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            datagrid_Sepet.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            datagrid_Sepet.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\UrunSes\barkod.wav");
+            simpleSound.Play();
         }
-        int karbontut;
+       
+
+        private void btn_Donustur_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = new DialogResult();
+            dialog = MessageBox.Show(ToplamKarbon().ToString() + " Adet Karbonu Hesabınıza Ekliyorsunuz. Yapmak İstediğiniz Başka Bir İşlem Var Mı? ", "Bilgilendirme", MessageBoxButtons.YesNo);
+
+            if (dialog == DialogResult.No)
+            {
+                karbontut += ToplamKarbon();
+                kul.KarbonEkle(karbontut, txt_KullaniciKimlik.Text);
+                urunProvider.UrunDurumGuncelle(Kodlar());
+                datagrid_Sepet.Rows.Clear();
+                tab_Control.SelectedIndex = 1;
+            }
+            
+            lbl_KarbonMikListe.Text = karbontut.ToString();
+            
+        }
+        
+        public string[] Kodlar()
+        {
+            string[] kods = new string[datagrid_Sepet.Rows.Count];
+            for (int i = 0; i < datagrid_Sepet.Rows.Count; i++)
+            {
+                kods[i] = datagrid_Sepet.Rows[i].Cells[0].Value.ToString();
+            }
+            return kods;
+        }
+        //----------------------------------------------------------------------
+
+        //TAB 2
+        
         public void DatagridDoldur()
         {
-            //id = int.Parse(dataGrid_Bilgi.Rows[0].Cells[0].Value.ToString());
-            //lbl_Ad1.Text = dataGrid_Bilgi.Rows[0].Cells[1].Value.ToString();
-            //lbl_Soyad1.Text = dataGrid_Bilgi.Rows[0].Cells[2].Value.ToString();
-            //txt_KulAd.Text = dataGrid_Bilgi.Rows[0].Cells[4].Value.ToString();
-            //txt_Mail.Text = dataGrid_Bilgi.Rows[0].Cells[5].Value.ToString();
-            //txt_Telefon.Text = dataGrid_Bilgi.Rows[0].Cells[6].Value.ToString();
-            //txt_KullaniciKimlik.Text = dataGrid_Bilgi.Rows[0].Cells[7].Value.ToString();
-            //lbl_KarbonMikListe.Text = dataGrid_Bilgi.Rows[0].Cells[8].Value.ToString();
             karbontut = int.Parse(lbl_KarbonMikListe.Text);
             ad = lbl_Ad1.Text;
             soyad = lbl_Soyad1.Text;
             mail = txt_Mail.Text;
             telefon = txt_Telefon.Text;
         }
-        private void timer_Ekle_Tick(object sender, EventArgs e)
+        private void link_KulBilgi_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            DialogResult dialog = new DialogResult();
-
-
-            dialog = MessageBox.Show("Ürün Sepete Eklendi !", "Bilgilendirme", MessageBoxButtons.OK);
-            DataKontrol();
-            dataGridBoyut();
-            if (dialog == DialogResult.OK)
+            KullaniciBilgiGuncelleme kulbilgi = new KullaniciBilgiGuncelleme();
+            kulbilgi.Show();
+            this.Hide();
+        }
+        public int ToplamKarbon()
+        {
+            int toplamKarbon = 0;
+            datagrid_Sepet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            foreach (DataGridViewRow row in datagrid_Sepet.Rows)
             {
-
+                int deger = int.Parse(row.Cells[3].Value.ToString());
+                toplamKarbon += deger;
             }
+            return toplamKarbon;
         }
         private void txt_UrunTur_TextChanged(object sender, EventArgs e)
         {
@@ -220,11 +220,6 @@ namespace RecycleCoin
                 txt_UrunTur.Text = "Demir";
             }
         }
-        public void playSimpleSound()
-        {
-            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\UrunSes\barkod.wav");
-            simpleSound.Play();
-        }
         public void KullaniciBilgileri()
         {
             KullaniciProvider kullaniciProvider = new KullaniciProvider();
@@ -241,20 +236,7 @@ namespace RecycleCoin
             txt_KulAd.Text = kullanici.KullaniciAd;
             txt_Mail.Text = kullanici.mail;
             txt_Telefon.Text = kullanici.telefonNo;
-           
-        }
-        private void btn_Donustur_Click(object sender, EventArgs e)
-        {
-            DialogResult dialog = new DialogResult();
-            dialog = MessageBox.Show(toplamKarbon.ToString() + " Adet Karbonu Hesabınıza Ekliyorsunuz. Yapmak İstediğiniz Başka Bir İşlem Var Mı? ", "Bilgilendirme", MessageBoxButtons.YesNo);
-            DataKontrol();
-            dataGridBoyut();
-            if (dialog == DialogResult.No)
-            {
-                karbontut += toplamKarbon;
-                kul.KarbonEkle(karbontut, LoginInfo.kulad);
-            }
-            lbl_KarbonMikListe.Text = karbontut.ToString();
+
         }
         private void btn_copy_Click(object sender, EventArgs e)
         {
@@ -262,24 +244,28 @@ namespace RecycleCoin
         }
         private void link_Donustur_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            DialogResult dialog = new DialogResult();
-            DateTime tarih = DateTime.Now;
-            if (karbontut < 100000)
+            Donustur donus = new Donustur();
+            int carbon = int.Parse(lbl_KarbonMikListe.Text);
+            if (carbon > 100000)
             {
-                MessageBox.Show("Dönüşüm Yapmak İçin Toplam Karbon Miktarınız 100.000 'den Fazla Olmalıdır. ");
+                   donus.ShowDialog();
+            }
+            else
+                MessageBox.Show("Dönüştürmek için yeterli Carbon(C)'a sahip değilsiniz!");
+        }
+        
+        //----------------------------------------------------------------------
+
+        //GENEL
+        private void tab_Control_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tab_Control.SelectedIndex != 0)
+            {
+                cam.SignalToStop();
             }
             else
             {
-                if (kul.Transfer(txt_KullaniciKimlik.Text,mail,karbontut, recycleCoin, tarih))
-
-                   dialog= MessageBox.Show(karbontut + " Adet Karbon Dönüşümü İçin Bilgi Geçildi En Kısa Sürede " + karbontut + " Karbona Eşit RecycleCoin Hesabınıza Yatırılacaktır.","Bilgilendirme !",MessageBoxButtons.OK);
-                if (dialog==DialogResult.OK)
-                {
-                    karbontut = 0;
-                    lbl_KarbonMikListe.Text = "0";
-                    kul.KarbonEkle(karbontut, txt_KullaniciKimlik.Text);
-                }
-
+                cam.Start();
             }
         }
     }

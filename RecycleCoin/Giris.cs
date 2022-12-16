@@ -22,9 +22,10 @@ namespace RecycleCoin
             var userInfo = system.Split("\\");
             LoginInfo.pcName = userInfo[0];
             LoginInfo.userName = userInfo[1];
-            label1.Text = pro.Timer().Start();
 
             InitializeComponent();
+            txt_Kulad.Text = "samedtemiz";
+            txt_Sifre.Text = "123456";
         }
         //Formu taşımak için
         Point lastPoint;
@@ -121,6 +122,6 @@ namespace RecycleCoin
         private void Giris_Load(object sender, EventArgs e)
         {
 
-        }
+        }   
     }
 }

@@ -375,7 +375,7 @@ namespace RecycleCoin
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1169, 723);
             this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Coin Bilgileri";
             // 
             // txt_RecycleFiyat
             // 
@@ -434,10 +434,6 @@ namespace RecycleCoin
             this.dataGrid_Para.Size = new System.Drawing.Size(20, 17);
             this.dataGrid_Para.TabIndex = 5;
             this.dataGrid_Para.Visible = false;
-            // 
-            // timer1
-            // 
-            
             // 
             // Admin
             // 
