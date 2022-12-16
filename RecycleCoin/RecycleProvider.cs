@@ -11,14 +11,9 @@ namespace RecycleCoin
 {
     public class RecycleProvider:Kullanicilar
     {
-       
-        public double carbon_degeri {//carbonumuzun rc karşılığı
-            get { return carbon_degeri; }
-            set { carbon_degeri = 0.00001; } 
-        }
+        public const double carbon_degeri = 0.00001;//carbonumuzun rc karşılığı
         public RecycleProvider()
-        {
-            
+        {    
             Baglan();
         }
         public bool RecycleGuncelle(double RecycleAdet)
@@ -46,10 +41,11 @@ namespace RecycleCoin
             return dt;
         }
 
-        public double RecycleCoinHesapla(int karbon)//gelen karbon adamın elindeki
+        public double RecycleCoinHesapla(int karbon)//gelen karbon kullanıcının elindeki
         {
            double recycle = karbon * carbon_degeri;
-           return recycle; //adamın alacağı karbon
+           return recycle; //kullanıcının alacağı karbon
+
         }
         
 

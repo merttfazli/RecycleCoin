@@ -258,3 +258,4 @@ C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\RecycleCoin\obj\Debug\net
 C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\RecycleCoin\obj\Debug\netcoreapp3.1\RecycleCoin.genruntimeconfig.cache
 C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\RecycleCoin\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\RecycleCoin\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\RecycleCoin\obj\Debug\netcoreapp3.1\RecycleCoin.Donustur.resources

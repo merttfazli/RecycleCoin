@@ -54,7 +54,7 @@ namespace RecycleCoin
         {
             List<Urunler> urun = new List<Urunler>();
             conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT UrunID, UrunAd, UrunTur, UrunKod, UrunKarbon, UrunQrUrl FROM Urunler", conn);
+            SqlCommand cmd = new SqlCommand("SELECT UrunID, UrunAd, UrunTur, UrunKod, UrunKarbon, UrunQrUrl, UrunDurum FROM Urunler", conn);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -66,6 +66,7 @@ namespace RecycleCoin
                 urunler.UrunKod = dr[3].ToString();
                 urunler.UrunKarbon = int.Parse(dr[4].ToString());
                 urunler.QrUrl = dr[5].ToString();
+                urunler.UrunDurum = Convert.ToBoolean(dr[6]);
                 urun.Add(urunler);
             }
             dr.Close();
@@ -103,6 +104,17 @@ namespace RecycleCoin
                 return false;
             }
 
+        }
+        public bool UrunDurumGuncelle(string[] kodlar)
+        {
+            conn.Open();
+            foreach (string kod in kodlar)
+            {
+                cmd = new SqlCommand("UPDATE Urunler SET UrunDurum=0 WHERE UrunKod = '" + kod + "'", conn);
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+            return true;
         }
         public DataTable UrunDoldur(string kod)
         {

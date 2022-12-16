@@ -49,12 +49,10 @@ namespace RecycleCoin
             this.lbl_Yas = new System.Windows.Forms.Label();
             this.txt_Yas = new System.Windows.Forms.TextBox();
             this.btn_back = new System.Windows.Forms.Button();
-            this.btn_sifreGoster = new System.Windows.Forms.Button();
             this.btn_sifreGizle = new System.Windows.Forms.Button();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_sifreGoster = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Ad
@@ -215,6 +213,7 @@ namespace RecycleCoin
             this.txt_Yas.PlaceholderText = "Yaş";
             this.txt_Yas.Size = new System.Drawing.Size(186, 29);
             this.txt_Yas.TabIndex = 3;
+          
             this.txt_Yas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Yas_KeyPress);
             // 
             // btn_back
@@ -226,18 +225,6 @@ namespace RecycleCoin
             this.btn_back.Text = "<- Giriş yap";
             this.btn_back.UseVisualStyleBackColor = true;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
-            // 
-            // btn_sifreGoster
-            // 
-            this.btn_sifreGoster.BackColor = System.Drawing.Color.Transparent;
-            this.btn_sifreGoster.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_sifreGoster.BackgroundImage")));
-            this.btn_sifreGoster.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_sifreGoster.Location = new System.Drawing.Point(529, 198);
-            this.btn_sifreGoster.Name = "btn_sifreGoster";
-            this.btn_sifreGoster.Size = new System.Drawing.Size(40, 29);
-            this.btn_sifreGoster.TabIndex = 10;
-            this.btn_sifreGoster.UseVisualStyleBackColor = false;
-            this.btn_sifreGoster.Click += new System.EventHandler(this.btn_sifreGoster_Click);
             // 
             // btn_sifreGizle
             // 
@@ -255,15 +242,17 @@ namespace RecycleCoin
             // 
             this.error.ContainerControl = this;
             // 
-            // dataGridView1
+            // btn_sifreGoster
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(782, 209);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(10, 12);
-            this.dataGridView1.TabIndex = 14;
+            this.btn_sifreGoster.BackColor = System.Drawing.Color.Transparent;
+            this.btn_sifreGoster.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_sifreGoster.BackgroundImage")));
+            this.btn_sifreGoster.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_sifreGoster.Location = new System.Drawing.Point(529, 198);
+            this.btn_sifreGoster.Name = "btn_sifreGoster";
+            this.btn_sifreGoster.Size = new System.Drawing.Size(40, 29);
+            this.btn_sifreGoster.TabIndex = 10;
+            this.btn_sifreGoster.UseVisualStyleBackColor = false;
+            this.btn_sifreGoster.Click += new System.EventHandler(this.btn_sifreGoster_Click);
             // 
             // KayitOl
             // 
@@ -291,7 +280,6 @@ namespace RecycleCoin
             this.Controls.Add(this.lbl_Soyad);
             this.Controls.Add(this.lbl_Ad);
             this.Controls.Add(this.txt_Sifre);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "KayitOl";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -299,7 +287,6 @@ namespace RecycleCoin
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.KayitOl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.KayitOl_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,9 +312,8 @@ namespace RecycleCoin
         private System.Windows.Forms.Label lbl_Yas;
         private System.Windows.Forms.TextBox txt_Yas;
         private System.Windows.Forms.Button btn_back;
-        private System.Windows.Forms.Button btn_sifreGoster;
         protected System.Windows.Forms.Button btn_sifreGizle;
         private System.Windows.Forms.ErrorProvider error;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btn_sifreGoster;
     }
 }

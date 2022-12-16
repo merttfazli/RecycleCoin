@@ -77,7 +77,7 @@ namespace RecycleCoin
             this.txt_UrunTur = new System.Windows.Forms.TextBox();
             this.txt_Urunad = new System.Windows.Forms.TextBox();
             this.datagrid_Sepet = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,10 +85,8 @@ namespace RecycleCoin
             this.lbl_KarbonMiktari = new System.Windows.Forms.Label();
             this.lbl_UrunAd = new System.Windows.Forms.Label();
             this.pic_QrOkutma = new System.Windows.Forms.PictureBox();
-            this.data_VeriTutucu = new System.Windows.Forms.DataGridView();
             this.tab_Control = new System.Windows.Forms.TabControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer_Ekle = new System.Windows.Forms.Timer(this.components);
             this.tab_Transfer.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tab_KullaniciBilgi.SuspendLayout();
@@ -97,7 +95,6 @@ namespace RecycleCoin
             this.tab_Anasayfa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_Sepet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_QrOkutma)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.data_VeriTutucu)).BeginInit();
             this.tab_Control.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,7 +120,7 @@ namespace RecycleCoin
             // check_Onaylama
             // 
             this.check_Onaylama.AutoSize = true;
-            this.check_Onaylama.Location = new System.Drawing.Point(361, 320);
+            this.check_Onaylama.Location = new System.Drawing.Point(381, 292);
             this.check_Onaylama.Name = "check_Onaylama";
             this.check_Onaylama.Size = new System.Drawing.Size(77, 24);
             this.check_Onaylama.TabIndex = 18;
@@ -132,7 +129,7 @@ namespace RecycleCoin
             // 
             // btn_Gonder
             // 
-            this.btn_Gonder.Location = new System.Drawing.Point(402, 358);
+            this.btn_Gonder.Location = new System.Drawing.Point(422, 330);
             this.btn_Gonder.Name = "btn_Gonder";
             this.btn_Gonder.Size = new System.Drawing.Size(119, 44);
             this.btn_Gonder.TabIndex = 16;
@@ -141,7 +138,7 @@ namespace RecycleCoin
             // 
             // txt_GondericiKim
             // 
-            this.txt_GondericiKim.Location = new System.Drawing.Point(361, 186);
+            this.txt_GondericiKim.Location = new System.Drawing.Point(381, 158);
             this.txt_GondericiKim.Name = "txt_GondericiKim";
             this.txt_GondericiKim.ReadOnly = true;
             this.txt_GondericiKim.Size = new System.Drawing.Size(205, 27);
@@ -149,14 +146,14 @@ namespace RecycleCoin
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(361, 280);
+            this.textBox12.Location = new System.Drawing.Point(381, 252);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(205, 27);
             this.textBox12.TabIndex = 14;
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(361, 233);
+            this.textBox13.Location = new System.Drawing.Point(381, 205);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(205, 27);
             this.textBox13.TabIndex = 12;
@@ -164,7 +161,7 @@ namespace RecycleCoin
             // lbl_GonCoinMik
             // 
             this.lbl_GonCoinMik.AutoSize = true;
-            this.lbl_GonCoinMik.Location = new System.Drawing.Point(130, 283);
+            this.lbl_GonCoinMik.Location = new System.Drawing.Point(150, 255);
             this.lbl_GonCoinMik.Name = "lbl_GonCoinMik";
             this.lbl_GonCoinMik.Size = new System.Drawing.Size(233, 20);
             this.lbl_GonCoinMik.TabIndex = 11;
@@ -173,7 +170,7 @@ namespace RecycleCoin
             // lbl_AlKimlik
             // 
             this.lbl_AlKimlik.AutoSize = true;
-            this.lbl_AlKimlik.Location = new System.Drawing.Point(263, 233);
+            this.lbl_AlKimlik.Location = new System.Drawing.Point(283, 205);
             this.lbl_AlKimlik.Name = "lbl_AlKimlik";
             this.lbl_AlKimlik.Size = new System.Drawing.Size(92, 20);
             this.lbl_AlKimlik.TabIndex = 9;
@@ -182,7 +179,7 @@ namespace RecycleCoin
             // lbl_KulKimlik
             // 
             this.lbl_KulKimlik.AutoSize = true;
-            this.lbl_KulKimlik.Location = new System.Drawing.Point(236, 188);
+            this.lbl_KulKimlik.Location = new System.Drawing.Point(256, 160);
             this.lbl_KulKimlik.Name = "lbl_KulKimlik";
             this.lbl_KulKimlik.Size = new System.Drawing.Size(127, 20);
             this.lbl_KulKimlik.TabIndex = 8;
@@ -282,9 +279,9 @@ namespace RecycleCoin
             this.btn_copy.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_copy.BackgroundImage")));
             this.btn_copy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_copy.ForeColor = System.Drawing.Color.Transparent;
-            this.btn_copy.Location = new System.Drawing.Point(583, 153);
+            this.btn_copy.Location = new System.Drawing.Point(618, 152);
             this.btn_copy.Name = "btn_copy";
-            this.btn_copy.Size = new System.Drawing.Size(37, 27);
+            this.btn_copy.Size = new System.Drawing.Size(37, 28);
             this.btn_copy.TabIndex = 11;
             this.btn_copy.UseVisualStyleBackColor = true;
             this.btn_copy.Click += new System.EventHandler(this.btn_copy_Click);
@@ -314,17 +311,18 @@ namespace RecycleCoin
             this.panel1.Controls.Add(this.lbl_Soyad);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(863, 97);
+            this.panel1.Size = new System.Drawing.Size(863, 111);
             this.panel1.TabIndex = 6;
             // 
             // link_Donustur
             // 
             this.link_Donustur.AutoSize = true;
-            this.link_Donustur.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.link_Donustur.LinkColor = System.Drawing.Color.Black;
-            this.link_Donustur.Location = new System.Drawing.Point(527, 70);
+            this.link_Donustur.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.link_Donustur.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.link_Donustur.LinkColor = System.Drawing.Color.Blue;
+            this.link_Donustur.Location = new System.Drawing.Point(464, 77);
             this.link_Donustur.Name = "link_Donustur";
-            this.link_Donustur.Size = new System.Drawing.Size(330, 20);
+            this.link_Donustur.Size = new System.Drawing.Size(381, 23);
             this.link_Donustur.TabIndex = 12;
             this.link_Donustur.TabStop = true;
             this.link_Donustur.Text = "Karbonları Coin\'e Dönüştürmek İçin Tıklayınız.";
@@ -333,122 +331,139 @@ namespace RecycleCoin
             // lbl_Soyad1
             // 
             this.lbl_Soyad1.AutoSize = true;
-            this.lbl_Soyad1.Location = new System.Drawing.Point(75, 42);
+            this.lbl_Soyad1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Soyad1.Location = new System.Drawing.Point(72, 43);
             this.lbl_Soyad1.Name = "lbl_Soyad1";
-            this.lbl_Soyad1.Size = new System.Drawing.Size(50, 20);
+            this.lbl_Soyad1.Size = new System.Drawing.Size(59, 23);
             this.lbl_Soyad1.TabIndex = 4;
             this.lbl_Soyad1.Text = "label2";
             // 
             // lbl_Ad1
             // 
             this.lbl_Ad1.AutoSize = true;
-            this.lbl_Ad1.Location = new System.Drawing.Point(75, 10);
+            this.lbl_Ad1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Ad1.Location = new System.Drawing.Point(72, 11);
             this.lbl_Ad1.Name = "lbl_Ad1";
-            this.lbl_Ad1.Size = new System.Drawing.Size(50, 20);
+            this.lbl_Ad1.Size = new System.Drawing.Size(59, 23);
             this.lbl_Ad1.TabIndex = 3;
             this.lbl_Ad1.Text = "label1";
             // 
             // lbl_KarbonMikListe
             // 
             this.lbl_KarbonMikListe.AutoSize = true;
-            this.lbl_KarbonMikListe.Location = new System.Drawing.Point(740, 42);
+            this.lbl_KarbonMikListe.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_KarbonMikListe.Location = new System.Drawing.Point(640, 42);
             this.lbl_KarbonMikListe.Name = "lbl_KarbonMikListe";
-            this.lbl_KarbonMikListe.Size = new System.Drawing.Size(17, 20);
+            this.lbl_KarbonMikListe.Size = new System.Drawing.Size(20, 23);
             this.lbl_KarbonMikListe.TabIndex = 1;
             this.lbl_KarbonMikListe.Text = "0";
             // 
             // lbl_Miktar
             // 
             this.lbl_Miktar.AutoSize = true;
-            this.lbl_Miktar.Location = new System.Drawing.Point(740, 10);
+            this.lbl_Miktar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Miktar.Location = new System.Drawing.Point(640, 10);
             this.lbl_Miktar.Name = "lbl_Miktar";
-            this.lbl_Miktar.Size = new System.Drawing.Size(17, 20);
+            this.lbl_Miktar.Size = new System.Drawing.Size(20, 23);
             this.lbl_Miktar.TabIndex = 1;
             this.lbl_Miktar.Text = "0";
             // 
             // lbl_karbon
             // 
             this.lbl_karbon.AutoSize = true;
-            this.lbl_karbon.Location = new System.Drawing.Point(624, 42);
+            this.lbl_karbon.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_karbon.Location = new System.Drawing.Point(506, 43);
             this.lbl_karbon.Name = "lbl_karbon";
-            this.lbl_karbon.Size = new System.Drawing.Size(110, 20);
+            this.lbl_karbon.Size = new System.Drawing.Size(137, 23);
             this.lbl_karbon.TabIndex = 0;
             this.lbl_karbon.Text = "Karbon Miktarı:";
             // 
             // lbl_RcycleMiktari
             // 
             this.lbl_RcycleMiktari.AutoSize = true;
-            this.lbl_RcycleMiktari.Location = new System.Drawing.Point(588, 10);
+            this.lbl_RcycleMiktari.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_RcycleMiktari.Location = new System.Drawing.Point(464, 11);
             this.lbl_RcycleMiktari.Name = "lbl_RcycleMiktari";
-            this.lbl_RcycleMiktari.Size = new System.Drawing.Size(146, 20);
+            this.lbl_RcycleMiktari.Size = new System.Drawing.Size(179, 23);
             this.lbl_RcycleMiktari.TabIndex = 0;
             this.lbl_RcycleMiktari.Text = "Recycle Coin Miktarı:";
             // 
             // lbl_Ad
             // 
             this.lbl_Ad.AutoSize = true;
-            this.lbl_Ad.Location = new System.Drawing.Point(29, 10);
+            this.lbl_Ad.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Ad.Location = new System.Drawing.Point(27, 11);
             this.lbl_Ad.Name = "lbl_Ad";
-            this.lbl_Ad.Size = new System.Drawing.Size(31, 20);
+            this.lbl_Ad.Size = new System.Drawing.Size(38, 23);
             this.lbl_Ad.TabIndex = 1;
             this.lbl_Ad.Text = "Ad:";
             // 
             // lbl_Soyad
             // 
             this.lbl_Soyad.AutoSize = true;
-            this.lbl_Soyad.Location = new System.Drawing.Point(7, 42);
+            this.lbl_Soyad.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Soyad.Location = new System.Drawing.Point(5, 43);
             this.lbl_Soyad.Name = "lbl_Soyad";
-            this.lbl_Soyad.Size = new System.Drawing.Size(53, 20);
+            this.lbl_Soyad.Size = new System.Drawing.Size(64, 23);
             this.lbl_Soyad.TabIndex = 2;
             this.lbl_Soyad.Text = "Soyad:";
             // 
             // txt_KulAd
             // 
+            this.txt_KulAd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txt_KulAd.Location = new System.Drawing.Point(380, 198);
             this.txt_KulAd.Name = "txt_KulAd";
             this.txt_KulAd.ReadOnly = true;
-            this.txt_KulAd.Size = new System.Drawing.Size(205, 27);
+            this.txt_KulAd.Size = new System.Drawing.Size(240, 27);
             this.txt_KulAd.TabIndex = 5;
+            this.txt_KulAd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_KullaniciKimlik
             // 
             this.txt_KullaniciKimlik.Location = new System.Drawing.Point(380, 153);
             this.txt_KullaniciKimlik.Name = "txt_KullaniciKimlik";
             this.txt_KullaniciKimlik.ReadOnly = true;
-            this.txt_KullaniciKimlik.Size = new System.Drawing.Size(205, 27);
+            this.txt_KullaniciKimlik.Size = new System.Drawing.Size(240, 27);
             this.txt_KullaniciKimlik.TabIndex = 5;
+            this.txt_KullaniciKimlik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_Telefon
             // 
+            this.txt_Telefon.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txt_Telefon.Location = new System.Drawing.Point(380, 288);
             this.txt_Telefon.Name = "txt_Telefon";
             this.txt_Telefon.ReadOnly = true;
-            this.txt_Telefon.Size = new System.Drawing.Size(205, 27);
+            this.txt_Telefon.Size = new System.Drawing.Size(240, 27);
             this.txt_Telefon.TabIndex = 4;
+            this.txt_Telefon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_Mail
             // 
+            this.txt_Mail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txt_Mail.Location = new System.Drawing.Point(380, 243);
             this.txt_Mail.Name = "txt_Mail";
             this.txt_Mail.ReadOnly = true;
-            this.txt_Mail.Size = new System.Drawing.Size(205, 27);
+            this.txt_Mail.Size = new System.Drawing.Size(240, 27);
             this.txt_Mail.TabIndex = 4;
+            this.txt_Mail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_Telefon
             // 
             this.lbl_Telefon.AutoSize = true;
+            this.lbl_Telefon.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_Telefon.Location = new System.Drawing.Point(315, 291);
             this.lbl_Telefon.Name = "lbl_Telefon";
-            this.lbl_Telefon.Size = new System.Drawing.Size(61, 20);
+            this.lbl_Telefon.Size = new System.Drawing.Size(65, 20);
             this.lbl_Telefon.TabIndex = 2;
             this.lbl_Telefon.Text = "Telefon:";
             // 
             // lbl_KulAd
             // 
             this.lbl_KulAd.AutoSize = true;
+            this.lbl_KulAd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_KulAd.Location = new System.Drawing.Point(281, 201);
             this.lbl_KulAd.Name = "lbl_KulAd";
-            this.lbl_KulAd.Size = new System.Drawing.Size(95, 20);
+            this.lbl_KulAd.Size = new System.Drawing.Size(100, 20);
             this.lbl_KulAd.TabIndex = 0;
             this.lbl_KulAd.Text = "Kullanıcı Adı:";
             // 
@@ -466,18 +481,20 @@ namespace RecycleCoin
             // lbl_Mail
             // 
             this.lbl_Mail.AutoSize = true;
+            this.lbl_Mail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_Mail.Location = new System.Drawing.Point(335, 246);
             this.lbl_Mail.Name = "lbl_Mail";
-            this.lbl_Mail.Size = new System.Drawing.Size(41, 20);
+            this.lbl_Mail.Size = new System.Drawing.Size(43, 20);
             this.lbl_Mail.TabIndex = 2;
             this.lbl_Mail.Text = "Mail:";
             // 
             // lbl_KullanıcıKimlik
             // 
             this.lbl_KullanıcıKimlik.AutoSize = true;
+            this.lbl_KullanıcıKimlik.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_KullanıcıKimlik.Location = new System.Drawing.Point(257, 156);
             this.lbl_KullanıcıKimlik.Name = "lbl_KullanıcıKimlik";
-            this.lbl_KullanıcıKimlik.Size = new System.Drawing.Size(119, 20);
+            this.lbl_KullanıcıKimlik.Size = new System.Drawing.Size(125, 20);
             this.lbl_KullanıcıKimlik.TabIndex = 0;
             this.lbl_KullanıcıKimlik.Text = "Kullanıcı Kimliği:";
             // 
@@ -495,7 +512,6 @@ namespace RecycleCoin
             this.tab_Anasayfa.Controls.Add(this.lbl_KarbonMiktari);
             this.tab_Anasayfa.Controls.Add(this.lbl_UrunAd);
             this.tab_Anasayfa.Controls.Add(this.pic_QrOkutma);
-            this.tab_Anasayfa.Controls.Add(this.data_VeriTutucu);
             this.tab_Anasayfa.Location = new System.Drawing.Point(4, 29);
             this.tab_Anasayfa.Name = "tab_Anasayfa";
             this.tab_Anasayfa.Padding = new System.Windows.Forms.Padding(3);
@@ -545,7 +561,7 @@ namespace RecycleCoin
             // 
             // txt_UrunTur
             // 
-            this.txt_UrunTur.Location = new System.Drawing.Point(573, 145);
+            this.txt_UrunTur.Location = new System.Drawing.Point(573, 102);
             this.txt_UrunTur.Name = "txt_UrunTur";
             this.txt_UrunTur.ReadOnly = true;
             this.txt_UrunTur.Size = new System.Drawing.Size(157, 27);
@@ -555,7 +571,7 @@ namespace RecycleCoin
             // 
             // txt_Urunad
             // 
-            this.txt_Urunad.Location = new System.Drawing.Point(573, 102);
+            this.txt_Urunad.Location = new System.Drawing.Point(573, 142);
             this.txt_Urunad.Name = "txt_Urunad";
             this.txt_Urunad.ReadOnly = true;
             this.txt_Urunad.Size = new System.Drawing.Size(157, 27);
@@ -569,49 +585,51 @@ namespace RecycleCoin
             this.datagrid_Sepet.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.datagrid_Sepet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagrid_Sepet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.kod,
             this.Column2,
             this.Column3,
             this.Column4});
             this.datagrid_Sepet.Location = new System.Drawing.Point(3, 339);
             this.datagrid_Sepet.Name = "datagrid_Sepet";
             this.datagrid_Sepet.ReadOnly = true;
+            this.datagrid_Sepet.RowHeadersVisible = false;
             this.datagrid_Sepet.RowHeadersWidth = 51;
             this.datagrid_Sepet.RowTemplate.Height = 29;
+            this.datagrid_Sepet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagrid_Sepet.Size = new System.Drawing.Size(863, 229);
             this.datagrid_Sepet.TabIndex = 2;
             // 
-            // Column1
+            // kod
             // 
-            this.Column1.HeaderText = "kod";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 125;
+            this.kod.HeaderText = "Ürünün Kodu";
+            this.kod.MinimumWidth = 6;
+            this.kod.Name = "kod";
+            this.kod.ReadOnly = true;
+            this.kod.Width = 200;
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "ad";
+            this.Column2.HeaderText = "Ürünün Adı";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            this.Column2.Width = 125;
+            this.Column2.Width = 260;
             // 
             // Column3
             // 
-            this.Column3.HeaderText = "tür";
+            this.Column3.HeaderText = "Ürünün Türü";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 125;
+            this.Column3.Width = 200;
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "karbon";
+            this.Column4.HeaderText = "Karbon Miktarı";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            this.Column4.Width = 125;
+            this.Column4.Width = 200;
             // 
             // lbl_UrunTuru
             // 
@@ -649,19 +667,6 @@ namespace RecycleCoin
             this.pic_QrOkutma.TabIndex = 0;
             this.pic_QrOkutma.TabStop = false;
             // 
-            // data_VeriTutucu
-            // 
-            this.data_VeriTutucu.AllowUserToAddRows = false;
-            this.data_VeriTutucu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.data_VeriTutucu.Enabled = false;
-            this.data_VeriTutucu.Location = new System.Drawing.Point(700, 105);
-            this.data_VeriTutucu.Name = "data_VeriTutucu";
-            this.data_VeriTutucu.ReadOnly = true;
-            this.data_VeriTutucu.RowHeadersWidth = 51;
-            this.data_VeriTutucu.RowTemplate.Height = 29;
-            this.data_VeriTutucu.Size = new System.Drawing.Size(18, 13);
-            this.data_VeriTutucu.TabIndex = 8;
-            // 
             // tab_Control
             // 
             this.tab_Control.Controls.Add(this.tab_Anasayfa);
@@ -673,14 +678,11 @@ namespace RecycleCoin
             this.tab_Control.SelectedIndex = 0;
             this.tab_Control.Size = new System.Drawing.Size(877, 704);
             this.tab_Control.TabIndex = 0;
+            this.tab_Control.SelectedIndexChanged += new System.EventHandler(this.tab_Control_SelectedIndexChanged);
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timer_Ekle
-            // 
-            this.timer_Ekle.Tick += new System.EventHandler(this.timer_Ekle_Tick);
             // 
             // Anasayfa
             // 
@@ -705,7 +707,6 @@ namespace RecycleCoin
             this.tab_Anasayfa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagrid_Sepet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_QrOkutma)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.data_VeriTutucu)).EndInit();
             this.tab_Control.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -762,12 +763,10 @@ namespace RecycleCoin
         private System.Windows.Forms.TextBox txt_UrunKodu;
         private System.Windows.Forms.Label lbl_UrunKod;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridView data_VeriTutucu;
-        private System.Windows.Forms.Timer timer_Ekle;
         private System.Windows.Forms.DataGridView dataGrid_Bilgi;
         private System.Windows.Forms.Button btn_copy;
         private System.Windows.Forms.LinkLabel link_Donustur;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;

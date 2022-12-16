@@ -20,6 +20,7 @@ namespace RecycleCoin
         public string UrunKod { get; set; }
         public int UrunKarbon { get; set; }
         public string QrUrl { get; set; }
+        public bool UrunDurum { get; set; }
        
     }
 }
