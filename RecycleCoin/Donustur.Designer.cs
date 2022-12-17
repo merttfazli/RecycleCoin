@@ -46,7 +46,6 @@ namespace RecycleCoin
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_tumBakiye = new System.Windows.Forms.Button();
             this.btn_kapat = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -231,22 +230,12 @@ namespace RecycleCoin
             this.btn_kapat.UseVisualStyleBackColor = true;
             this.btn_kapat.Click += new System.EventHandler(this.btn_kapat_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(132, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "label3";
-            // 
             // Donustur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(241)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(500, 400);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_kapat);
             this.Controls.Add(this.btn_tumBakiye);
             this.Controls.Add(this.pictureBox1);
@@ -268,7 +257,6 @@ namespace RecycleCoin
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -289,6 +277,5 @@ namespace RecycleCoin
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_tumBakiye;
         private System.Windows.Forms.Button btn_kapat;
-        private System.Windows.Forms.Label label3;
     }
 }

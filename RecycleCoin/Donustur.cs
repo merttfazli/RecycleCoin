@@ -42,6 +42,7 @@ namespace RecycleCoin
         }
 
         int carbon_toCoin;
+        
         private void txt_carbonAdet_TextChanged(object sender, EventArgs e)
         {
             decimal lbl = Convert.ToDecimal(lbl_carbonBakiye.Text);
@@ -69,7 +70,6 @@ namespace RecycleCoin
                 txt_coinAdet.Select(txt_coinAdet.Text.Length, 0);
             }
         }
-
         private void btn_Onayla_Click(object sender, EventArgs e)
         {
             TransferProvider traPro = new TransferProvider();

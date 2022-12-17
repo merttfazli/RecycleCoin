@@ -16,8 +16,8 @@ namespace RecycleCoin
     {
         string kimlik;
         string transferid;
-        int karbon;// boş bu evet boşmuş
-        double recycle;// bu nerde doluyodu unuttum aq
+        int karbon;
+        double recycle;
         DateTime time;
         char onay;
         
@@ -44,6 +44,7 @@ namespace RecycleCoin
         }
         double toplamRecycleCoin = 0.0;
         double RecycleFiyat;
+        CheckBox headerCheckBox = new CheckBox();
         public void DataGridAyar()
         {
             dataGrid_Kullanicilar.Columns[0].HeaderText = "Ad";
@@ -71,11 +72,10 @@ namespace RecycleCoin
 
             dataGrid_Onay.Columns[0].HeaderText = "Transfer ID";
             dataGrid_Onay.Columns[1].HeaderText = "Kullanıcı Kimlik";
-            dataGrid_Onay.Columns[2].HeaderText = "Mail";
-            dataGrid_Onay.Columns[3].HeaderText = "Donusturulecek Karbon";
-            dataGrid_Onay.Columns[4].HeaderText = "RecycleCoin";
-            dataGrid_Onay.Columns[5].HeaderText = "İstek Tarihi";
-            dataGrid_Onay.Columns[6].HeaderText = "Onay";
+            dataGrid_Onay.Columns[2].HeaderText = "Donusturulecek Karbon";
+            dataGrid_Onay.Columns[3].HeaderText = "RecycleCoin";
+            dataGrid_Onay.Columns[4].HeaderText = "İstek Tarihi";
+            dataGrid_Onay.Columns[5].HeaderText = "Onay";
             dataGrid_Onay.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGrid_Onay.Columns[0].Width = 100;
             dataGrid_Onay.Columns[1].Width = 350;
@@ -83,7 +83,11 @@ namespace RecycleCoin
             dataGrid_Onay.Columns[3].Width = 140;
             dataGrid_Onay.Columns[4].Width = 120;
             dataGrid_Onay.Columns[5].Width = 100;
-            dataGrid_Onay.Columns[6].Width = 100;
+            dataGrid_Onay.Columns[0].ReadOnly = true;
+            dataGrid_Onay.Columns[1].ReadOnly = true;
+            dataGrid_Onay.Columns[2].ReadOnly = true;
+            dataGrid_Onay.Columns[3].ReadOnly = true;
+            dataGrid_Onay.Columns[4].ReadOnly = true;
 
             dataGrid_Onay.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             dataGrid_Onay.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
@@ -91,19 +95,20 @@ namespace RecycleCoin
             dataGrid_Onay.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             dataGrid_Onay.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             dataGrid_Onay.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGrid_Onay.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGrid_Onay.Columns[5].ReadOnly = false;
+           
         }
         public void OnayDoldur()
         { 
-            cmb_Onay.Text = dataGrid_Onay.CurrentRow.Cells[6].Value.ToString();
-            transferid = dataGrid_Onay.CurrentRow.Cells[0].Value.ToString();
-            kimlik = dataGrid_Onay.CurrentRow.Cells[1].Value.ToString();
-            karbon = Convert.ToInt32(dataGrid_Onay.CurrentRow.Cells[3].Value.ToString());//bizbu adama bunu göstermezsek karbonu list yoluyla çekmemiz gerekiyor gösterelim onda sıkıntı yok bu işlenmemiş karbon dimi ? bak göstercem hangi karbon olduğunu
-            time = DateTime.Now;// okey gibi
+            //cmb_Onay.Text = dataGrid_Onay.CurrentRow.Cells[5].Value.ToString();
+            //transferid = dataGrid_Onay.CurrentRow.Cells[0].Value.ToString();
+            //kimlik = dataGrid_Onay.CurrentRow.Cells[1].Value.ToString();
+            //karbon = Convert.ToInt32(dataGrid_Onay.CurrentRow.Cells[3].Value.ToString());
+            //time = DateTime.Now;
         }
         public void TextDoldur()
         {
-            txt_ToplamRecycle.Text = dataGrid_Para.Rows[0].Cells[0].Value.ToString();// db den gelen veri bu toplam coin mi evet 10 mn olan
+            txt_ToplamRecycle.Text = dataGrid_Para.Rows[0].Cells[0].Value.ToString();
             
         }
         public async void degiskendoldur()
@@ -162,10 +167,6 @@ namespace RecycleCoin
             }
         }
 
-        private void dataGrid_Onay_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            OnayDoldur();
-        }
         private void cmb_Onay_SelectedIndexChanged(object sender, EventArgs e)
         {
             //DialogResult dialog = new DialogResult();
@@ -187,6 +188,19 @@ namespace RecycleCoin
             Anasayfa ana = new Anasayfa();
             ana.Show();
             this.Hide();
+        }
+
+        private void btn_tumunuSec_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGrid_Onay.RowCount; i++)
+            {
+                string secim = "";
+                secim = dataGrid_Onay.Rows[i].Cells[5].Value.ToString();
+                if (dataGrid_Onay.Rows[i].Cells[5].Value == true)
+                {
+                    MessageBox.Show("hhh");
+                }
+            }
         }
     }
 }

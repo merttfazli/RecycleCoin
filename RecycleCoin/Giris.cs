@@ -24,8 +24,7 @@ namespace RecycleCoin
             LoginInfo.userName = userInfo[1];
 
             InitializeComponent();
-            txt_Kulad.Text = "samedtemiz";
-            txt_Sifre.Text = "123456";
+            
         }
         //Formu taşımak için
         Point lastPoint;

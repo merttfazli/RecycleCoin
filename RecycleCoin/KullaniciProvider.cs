@@ -260,7 +260,7 @@ namespace RecycleCoin
         {
             conn.Open();
             DataTable dt = new DataTable();
-            SqlCommand cmd = new SqlCommand("Select TransferID, KullaniciKimlik, Mail, Karbon, RecycleCoin, IstekTarihi,Onay from Transfer where Onay='0'", conn);
+            SqlCommand cmd = new SqlCommand("Select TransferID, KullaniciKimlik, Karbon, RecycleCoin, IstekTarihi,Onay from Transfer where Onay='0'", conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             conn.Close();

@@ -1,6 +1,7 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -25,23 +26,19 @@ namespace RecycleCoin
         UrunProvider urunProvider = new UrunProvider();
         KullaniciProvider kul = new KullaniciProvider();
         Donustur don = new Donustur();
+        TransferProvider tra = new TransferProvider();
+
         public Anasayfa()
         {
             InitializeComponent();
             don.FormClosed += new FormClosedEventHandler(don_FormClosed);
-            //don.TheButton += new EventHandler(don_TheButtonClicked);
+           
             FotografYakala();
             KullaniciBilgileri();
             DatagridDoldur();
         }
-        void don_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            lbl_KarbonMikListe.Text = "lalalasd";
-        }
-        //void don_TheButtonClicked(object sender, EventArgs e)
-        //{
-        //    lbl_KarbonMikListe.Text = "lalalasd";
-        //}
+        
+       
         //TAB 1
         VideoCaptureDevice cam;
         FilterInfoCollection webcam;
@@ -139,8 +136,6 @@ namespace RecycleCoin
             SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\merts\Belgeler\GitHub\RecycleCoin\RecycleCoin\UrunSes\barkod.wav");
             simpleSound.Play();
         }
-       
-
         private void btn_Donustur_Click(object sender, EventArgs e)
         {
             DialogResult dialog = new DialogResult();
@@ -237,6 +232,43 @@ namespace RecycleCoin
             txt_Mail.Text = kullanici.mail;
             txt_Telefon.Text = kullanici.telefonNo;
 
+            TransferKontrol();
+            dataduzen();
+
+        }
+        public void TransferKontrol()
+        {
+            var kullanici = kul.kulList().Find(x => (x.KullaniciAd == LoginInfo.kulad));
+            var transfer = tra.TransferListele().FindAll(x => (x.KullaniciKimlik == kul.SHA256Hash(kullanici.ID)) && (x.Onay == false));
+
+            dataGrid_OnayBekleyen.DataSource = transfer;
+
+        }
+        public void dataduzen()
+        {
+            dataGrid_OnayBekleyen.Columns[2].HeaderText = "Dönüşüm Yapılacak Karbon Miktarı";
+            dataGrid_OnayBekleyen.Columns[3].HeaderText = "Elde Edilecek Coin Miktarı";
+            dataGrid_OnayBekleyen.Columns[4].HeaderText = "İstek Tarihi";
+            dataGrid_OnayBekleyen.Columns[6].HeaderText = "Onay";
+            dataGrid_OnayBekleyen.Columns[2].Width = 290;
+            dataGrid_OnayBekleyen.Columns[3].Width = 230;
+            dataGrid_OnayBekleyen.Columns[4].Width = 150;
+            dataGrid_OnayBekleyen.Columns[6].Width = 139;
+
+            dataGrid_OnayBekleyen.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGrid_OnayBekleyen.Columns[0].Visible = false;
+            dataGrid_OnayBekleyen.Columns[1].Visible = false;
+            dataGrid_OnayBekleyen.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGrid_OnayBekleyen.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGrid_OnayBekleyen.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGrid_OnayBekleyen.Columns[5].Visible = false;
+            dataGrid_OnayBekleyen.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            string[] deneme = new string[dataGrid_OnayBekleyen.Rows.Count];
+            for (int i = 0; i < dataGrid_OnayBekleyen.Rows.Count; i++)
+            {
+                 deneme[i] = dataGrid_OnayBekleyen.Rows[i].Cells[4].Value.ToString().Substring(0,10);
+                dataGrid_OnayBekleyen.Rows[i].Cells[4].Value = deneme[i];
+            }
         }
         private void btn_copy_Click(object sender, EventArgs e)
         {
@@ -244,16 +276,23 @@ namespace RecycleCoin
         }
         private void link_Donustur_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Donustur donus = new Donustur();
             int carbon = int.Parse(lbl_KarbonMikListe.Text);
             if (carbon > 100000)
             {
-                   donus.ShowDialog();
+                   don.ShowDialog();
             }
             else
                 MessageBox.Show("Dönüştürmek için yeterli Carbon(C)'a sahip değilsiniz!");
         }
-        
+        void don_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            KullaniciBilgileri();
+        }
+
+        public void OnayBekleyen()
+        {
+
+        }
         //----------------------------------------------------------------------
 
         //GENEL

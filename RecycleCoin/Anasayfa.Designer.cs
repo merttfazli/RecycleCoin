@@ -32,8 +32,8 @@ namespace RecycleCoin
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Anasayfa));
             this.tab_Transfer = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.check_Onaylama = new System.Windows.Forms.CheckBox();
+            this.lbl_Title = new System.Windows.Forms.Label();
+            this.dataGrid_Transferler = new System.Windows.Forms.DataGridView();
             this.btn_Gonder = new System.Windows.Forms.Button();
             this.txt_GondericiKim = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
@@ -49,10 +49,12 @@ namespace RecycleCoin
             this.lbl_Rc = new System.Windows.Forms.Label();
             this.lbl_RecycleMik = new System.Windows.Forms.Label();
             this.tab_KullaniciBilgi = new System.Windows.Forms.TabPage();
+            this.lbl_OnayBekleyen = new System.Windows.Forms.Label();
+            this.dataGrid_OnayBekleyen = new System.Windows.Forms.DataGridView();
             this.btn_copy = new System.Windows.Forms.Button();
             this.link_KulBilgi = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_transferBilgi = new System.Windows.Forms.Label();
             this.link_Donustur = new System.Windows.Forms.LinkLabel();
             this.lbl_Soyad1 = new System.Windows.Forms.Label();
             this.lbl_Ad1 = new System.Windows.Forms.Label();
@@ -90,8 +92,10 @@ namespace RecycleCoin
             this.tab_Control = new System.Windows.Forms.TabControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tab_Transfer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Transferler)).BeginInit();
             this.panel2.SuspendLayout();
             this.tab_KullaniciBilgi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_OnayBekleyen)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Bilgi)).BeginInit();
             this.tab_Anasayfa.SuspendLayout();
@@ -103,8 +107,8 @@ namespace RecycleCoin
             // tab_Transfer
             // 
             this.tab_Transfer.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.tab_Transfer.Controls.Add(this.label1);
-            this.tab_Transfer.Controls.Add(this.check_Onaylama);
+            this.tab_Transfer.Controls.Add(this.lbl_Title);
+            this.tab_Transfer.Controls.Add(this.dataGrid_Transferler);
             this.tab_Transfer.Controls.Add(this.btn_Gonder);
             this.tab_Transfer.Controls.Add(this.txt_GondericiKim);
             this.tab_Transfer.Controls.Add(this.textBox12);
@@ -120,28 +124,31 @@ namespace RecycleCoin
             this.tab_Transfer.TabIndex = 2;
             this.tab_Transfer.Text = "Transfer";
             // 
-            // label1
+            // lbl_Title
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(58, 427);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 20);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "transfer geçmişi tablosu";
+            this.lbl_Title.AutoSize = true;
+            this.lbl_Title.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_Title.ForeColor = System.Drawing.Color.Black;
+            this.lbl_Title.Location = new System.Drawing.Point(283, 357);
+            this.lbl_Title.Name = "lbl_Title";
+            this.lbl_Title.Size = new System.Drawing.Size(283, 46);
+            this.lbl_Title.TabIndex = 20;
+            this.lbl_Title.Text = "Transfer Geçmişi";
             // 
-            // check_Onaylama
+            // dataGrid_Transferler
             // 
-            this.check_Onaylama.AutoSize = true;
-            this.check_Onaylama.Location = new System.Drawing.Point(381, 292);
-            this.check_Onaylama.Name = "check_Onaylama";
-            this.check_Onaylama.Size = new System.Drawing.Size(77, 24);
-            this.check_Onaylama.TabIndex = 18;
-            this.check_Onaylama.Text = "Onayla";
-            this.check_Onaylama.UseVisualStyleBackColor = true;
+            this.dataGrid_Transferler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_Transferler.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGrid_Transferler.Location = new System.Drawing.Point(3, 417);
+            this.dataGrid_Transferler.Name = "dataGrid_Transferler";
+            this.dataGrid_Transferler.RowHeadersWidth = 51;
+            this.dataGrid_Transferler.RowTemplate.Height = 29;
+            this.dataGrid_Transferler.Size = new System.Drawing.Size(863, 251);
+            this.dataGrid_Transferler.TabIndex = 19;
             // 
             // btn_Gonder
             // 
-            this.btn_Gonder.Location = new System.Drawing.Point(422, 330);
+            this.btn_Gonder.Location = new System.Drawing.Point(421, 277);
             this.btn_Gonder.Name = "btn_Gonder";
             this.btn_Gonder.Size = new System.Drawing.Size(119, 44);
             this.btn_Gonder.TabIndex = 16;
@@ -150,7 +157,7 @@ namespace RecycleCoin
             // 
             // txt_GondericiKim
             // 
-            this.txt_GondericiKim.Location = new System.Drawing.Point(381, 158);
+            this.txt_GondericiKim.Location = new System.Drawing.Point(381, 141);
             this.txt_GondericiKim.Name = "txt_GondericiKim";
             this.txt_GondericiKim.ReadOnly = true;
             this.txt_GondericiKim.Size = new System.Drawing.Size(205, 27);
@@ -158,14 +165,14 @@ namespace RecycleCoin
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(381, 252);
+            this.textBox12.Location = new System.Drawing.Point(381, 235);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(205, 27);
             this.textBox12.TabIndex = 14;
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(381, 205);
+            this.textBox13.Location = new System.Drawing.Point(381, 188);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(205, 27);
             this.textBox13.TabIndex = 12;
@@ -173,7 +180,7 @@ namespace RecycleCoin
             // lbl_GonCoinMik
             // 
             this.lbl_GonCoinMik.AutoSize = true;
-            this.lbl_GonCoinMik.Location = new System.Drawing.Point(150, 255);
+            this.lbl_GonCoinMik.Location = new System.Drawing.Point(150, 238);
             this.lbl_GonCoinMik.Name = "lbl_GonCoinMik";
             this.lbl_GonCoinMik.Size = new System.Drawing.Size(233, 20);
             this.lbl_GonCoinMik.TabIndex = 11;
@@ -182,7 +189,7 @@ namespace RecycleCoin
             // lbl_AlKimlik
             // 
             this.lbl_AlKimlik.AutoSize = true;
-            this.lbl_AlKimlik.Location = new System.Drawing.Point(283, 205);
+            this.lbl_AlKimlik.Location = new System.Drawing.Point(283, 188);
             this.lbl_AlKimlik.Name = "lbl_AlKimlik";
             this.lbl_AlKimlik.Size = new System.Drawing.Size(92, 20);
             this.lbl_AlKimlik.TabIndex = 9;
@@ -191,7 +198,7 @@ namespace RecycleCoin
             // lbl_KulKimlik
             // 
             this.lbl_KulKimlik.AutoSize = true;
-            this.lbl_KulKimlik.Location = new System.Drawing.Point(256, 160);
+            this.lbl_KulKimlik.Location = new System.Drawing.Point(256, 143);
             this.lbl_KulKimlik.Name = "lbl_KulKimlik";
             this.lbl_KulKimlik.Size = new System.Drawing.Size(127, 20);
             this.lbl_KulKimlik.TabIndex = 8;
@@ -267,6 +274,8 @@ namespace RecycleCoin
             // tab_KullaniciBilgi
             // 
             this.tab_KullaniciBilgi.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tab_KullaniciBilgi.Controls.Add(this.lbl_OnayBekleyen);
+            this.tab_KullaniciBilgi.Controls.Add(this.dataGrid_OnayBekleyen);
             this.tab_KullaniciBilgi.Controls.Add(this.btn_copy);
             this.tab_KullaniciBilgi.Controls.Add(this.link_KulBilgi);
             this.tab_KullaniciBilgi.Controls.Add(this.panel1);
@@ -285,6 +294,29 @@ namespace RecycleCoin
             this.tab_KullaniciBilgi.Size = new System.Drawing.Size(869, 671);
             this.tab_KullaniciBilgi.TabIndex = 1;
             this.tab_KullaniciBilgi.Text = "Kullanıcı Bilgileri";
+            // 
+            // lbl_OnayBekleyen
+            // 
+            this.lbl_OnayBekleyen.AutoSize = true;
+            this.lbl_OnayBekleyen.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_OnayBekleyen.ForeColor = System.Drawing.Color.Black;
+            this.lbl_OnayBekleyen.Location = new System.Drawing.Point(273, 384);
+            this.lbl_OnayBekleyen.Name = "lbl_OnayBekleyen";
+            this.lbl_OnayBekleyen.Size = new System.Drawing.Size(386, 41);
+            this.lbl_OnayBekleyen.TabIndex = 22;
+            this.lbl_OnayBekleyen.Text = "Onay Bekleyen Transferler";
+            // 
+            // dataGrid_OnayBekleyen
+            // 
+            this.dataGrid_OnayBekleyen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_OnayBekleyen.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGrid_OnayBekleyen.Location = new System.Drawing.Point(3, 441);
+            this.dataGrid_OnayBekleyen.Name = "dataGrid_OnayBekleyen";
+            this.dataGrid_OnayBekleyen.ReadOnly = true;
+            this.dataGrid_OnayBekleyen.RowHeadersWidth = 51;
+            this.dataGrid_OnayBekleyen.RowTemplate.Height = 29;
+            this.dataGrid_OnayBekleyen.Size = new System.Drawing.Size(863, 227);
+            this.dataGrid_OnayBekleyen.TabIndex = 21;
             // 
             // btn_copy
             // 
@@ -312,7 +344,7 @@ namespace RecycleCoin
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lbl_transferBilgi);
             this.panel1.Controls.Add(this.link_Donustur);
             this.panel1.Controls.Add(this.lbl_Soyad1);
             this.panel1.Controls.Add(this.lbl_Ad1);
@@ -327,14 +359,14 @@ namespace RecycleCoin
             this.panel1.Size = new System.Drawing.Size(863, 111);
             this.panel1.TabIndex = 6;
             // 
-            // label2
+            // lbl_transferBilgi
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(166, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 20);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "((0) MİKTAR KARBON BEKLEMEDE)";
+            this.lbl_transferBilgi.AutoSize = true;
+            this.lbl_transferBilgi.Location = new System.Drawing.Point(312, 42);
+            this.lbl_transferBilgi.Name = "lbl_transferBilgi";
+            this.lbl_transferBilgi.Size = new System.Drawing.Size(50, 20);
+            this.lbl_transferBilgi.TabIndex = 13;
+            this.lbl_transferBilgi.Text = "label2";
             // 
             // link_Donustur
             // 
@@ -718,10 +750,12 @@ namespace RecycleCoin
             this.Text = "Anasayfa";
             this.tab_Transfer.ResumeLayout(false);
             this.tab_Transfer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Transferler)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tab_KullaniciBilgi.ResumeLayout(false);
             this.tab_KullaniciBilgi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_OnayBekleyen)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_Bilgi)).EndInit();
@@ -779,7 +813,6 @@ namespace RecycleCoin
         private System.Windows.Forms.PictureBox pic_QrOkutma;
         private System.Windows.Forms.TabControl tab_Control;
         private System.Windows.Forms.LinkLabel link_KulBilgi;
-        private System.Windows.Forms.CheckBox check_Onaylama;
         private System.Windows.Forms.Label lbl_karbon;
         private System.Windows.Forms.TextBox txt_UrunKodu;
         private System.Windows.Forms.Label lbl_UrunKod;
@@ -790,9 +823,12 @@ namespace RecycleCoin
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lbl_KarbonMikListe;
+        private System.Windows.Forms.Label lbl_transferBilgi;
+        private System.Windows.Forms.Label lbl_Title;
+        private System.Windows.Forms.DataGridView dataGrid_Transferler;
+        private System.Windows.Forms.Label lbl_OnayBekleyen;
+        private System.Windows.Forms.DataGridView dataGrid_OnayBekleyen;
     }
 }

@@ -53,6 +53,7 @@ namespace RecycleCoin
             this.lbl_Ad = new System.Windows.Forms.Label();
             this.dataGrid_Kullanicilar = new System.Windows.Forms.DataGridView();
             this.tab_Onay = new System.Windows.Forms.TabPage();
+            this.btn_tumunuSec = new System.Windows.Forms.Button();
             this.cmb_Onay = new System.Windows.Forms.ComboBox();
             this.lbl_Onay = new System.Windows.Forms.Label();
             this.dataGrid_Onay = new System.Windows.Forms.DataGridView();
@@ -316,6 +317,7 @@ namespace RecycleCoin
             // tab_Onay
             // 
             this.tab_Onay.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.tab_Onay.Controls.Add(this.btn_tumunuSec);
             this.tab_Onay.Controls.Add(this.cmb_Onay);
             this.tab_Onay.Controls.Add(this.lbl_Onay);
             this.tab_Onay.Controls.Add(this.dataGrid_Onay);
@@ -325,6 +327,16 @@ namespace RecycleCoin
             this.tab_Onay.Size = new System.Drawing.Size(1169, 723);
             this.tab_Onay.TabIndex = 1;
             this.tab_Onay.Text = "Onaylama";
+            // 
+            // btn_tumunuSec
+            // 
+            this.btn_tumunuSec.Location = new System.Drawing.Point(825, 72);
+            this.btn_tumunuSec.Name = "btn_tumunuSec";
+            this.btn_tumunuSec.Size = new System.Drawing.Size(230, 29);
+            this.btn_tumunuSec.TabIndex = 16;
+            this.btn_tumunuSec.Text = "btn_TumunuSec";
+            this.btn_tumunuSec.UseVisualStyleBackColor = true;
+            this.btn_tumunuSec.Click += new System.EventHandler(this.btn_tumunuSec_Click);
             // 
             // cmb_Onay
             // 
@@ -352,14 +364,12 @@ namespace RecycleCoin
             this.dataGrid_Onay.AllowUserToAddRows = false;
             this.dataGrid_Onay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid_Onay.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGrid_Onay.Location = new System.Drawing.Point(3, 67);
+            this.dataGrid_Onay.Location = new System.Drawing.Point(3, 107);
             this.dataGrid_Onay.Name = "dataGrid_Onay";
-            this.dataGrid_Onay.ReadOnly = true;
             this.dataGrid_Onay.RowHeadersWidth = 51;
             this.dataGrid_Onay.RowTemplate.Height = 29;
-            this.dataGrid_Onay.Size = new System.Drawing.Size(1163, 653);
+            this.dataGrid_Onay.Size = new System.Drawing.Size(1163, 613);
             this.dataGrid_Onay.TabIndex = 13;
-            this.dataGrid_Onay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_Onay_CellClick);
             // 
             // tabPage1
             // 
@@ -384,7 +394,7 @@ namespace RecycleCoin
             this.txt_RecycleFiyat.ReadOnly = true;
             this.txt_RecycleFiyat.Size = new System.Drawing.Size(218, 27);
             this.txt_RecycleFiyat.TabIndex = 4;
-            this.txt_RecycleFiyat.Text = "0";
+            this.txt_RecycleFiyat.Text = "0.00001";
             this.txt_RecycleFiyat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_ToplamRecycle
@@ -495,5 +505,6 @@ namespace RecycleCoin
         private System.Windows.Forms.DataGridView dataGrid_Para;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btn_Exit;
+        private System.Windows.Forms.Button btn_tumunuSec;
     }
 }
